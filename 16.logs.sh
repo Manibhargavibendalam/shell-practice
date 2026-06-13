@@ -20,26 +20,37 @@ if [ $USERID -ne 0 ]; then
     exit 1
 fi
 
-dnf install mysql -y
+
+VALIDATE(){
+    if [ $1 -ne 0 ]; then
+      echo -e "ERROR:: Installing $2 is... $R failure $N"
+      exit 1
+    else
+      echo -e "Installing $2 is.... $G success $N"
+fi
+}
+
+dnf list installed mysql &>> $LOG_FILE
 if [ $? -ne 0 ]; then
-    echo "ERROR:: Installing MySQL is failure"
-    exit 1
+    dnf install mysql -y &>> $LOG_FILE
+    VALIDATE $? "MySQL"
 else
-    echo "Installing mysql is success"
+    echo -e "MySQL is already installed... $Y Skipping... $N"
+fi
+
+dnf list installed nginx &>> $LOG_FILE
+if [ $? -ne 0 ]; then
+    dnf install nginx -y &>> $LOG_FILE
+    VALIDATE $? "Nginx"
+else
+    echo -e "Nginx is already installed... $Y Skipping... $N"
 fi
 
 
-dnf install nginx -y
-if [ $? -ne 0 ]; then
-    echo "ERROR:: Installing Nginx is failure"
-    exit 1
+dnf list installed python3 &>> $LOG_FILE
+if [ $? -ne 0 ]; then 
+    dnf install python3 -y &>> $LOG_FILE
+    VALIDATE $? "Python3"
 else
-    echo "Installing Nginx is success"
+    echo -e "Python3 is already installed... $Y Skipping... $N"
 fi
-
-dnf install python3 -y
-if [ $? -ne 0 ]; then
-    echo "ERROR:: Installing Python3 is failure"
-    exit 1
-else
-    echo "Installing Python3 is success"
