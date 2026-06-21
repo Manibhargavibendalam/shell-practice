@@ -53,6 +53,13 @@ if [ ! -z "$FILES" ]; then
    ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
    echo "Zip file name : $ZIP_FILE"
    find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS | zip -@ -j "$ZIP_FILE"  # -@ to read the file names from stdin and -j to junk the directory structure
+
+   if [ -f $ZIP_FILE ]
+   then 
+      echo -e "Archeival...$G SUCCESS $N"
+   else 
+      echo "Archieve the files....FAILURE"
+      exit 1
 else
    echo -e "No files to archieve....$R Skipping...$N"
 fi
