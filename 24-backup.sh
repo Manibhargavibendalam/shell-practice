@@ -10,6 +10,8 @@ N="\e[0m"
 
 SOURCE_DIR=$1
 DEST_DIR=$2
+# DAYS=${3}
+DAYS=${3:-14} #default 14 days if not provided
 
 LOGS_FOLDER="/var/log/shell-script"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) #getting script name without extension
@@ -41,3 +43,12 @@ if [ ! -d "$DEST_DIR" ]; then
    echo -e "$R destination $DEST_DIR does not exist $N"
    exit 1
 fi 
+
+FILES=$(find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS)
+
+# -z checks if the variable is empty or not. If it is empty, then it will return true.
+if [ ! -z "$FILES" ]; then
+   echo "files found"
+else
+   echo "No files to archieve....$R Skipping...$N"
+fi
