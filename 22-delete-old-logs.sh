@@ -22,7 +22,8 @@ if  [ ! -d $SOURCE_DIR ];then
    exit 1
 fi
 
-FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f -mtime +14)
+FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f)
+# FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f -mtime +14)   to delete the 14 day old files
 
 while IFS= read -r filepath 
 do 
