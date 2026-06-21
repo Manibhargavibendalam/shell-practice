@@ -50,5 +50,5 @@ FILES=$(find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS)
 if [ ! -z "$FILES" ]; then
    echo "files found"
 else
-   echo "No files to archieve....$R Skipping...$N"
+   echo -e "No files to archieve....$R Skipping...$N"
 fi
