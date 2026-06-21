@@ -27,5 +27,6 @@ fi
 # Loop through the file line by line
 while IFS= read -r line; do
     # Process each line here
-    printf '%s\n' "$line"
+    echo "Processing line: $line"
+    # printf '%s\n' "$line"
 done < "$FILE_PATH"
