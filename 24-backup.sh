@@ -65,7 +65,7 @@ if [ ! -z "$FILES" ]; then
       echo -e "Archeival...$G SUCCESS $N"
 
       ##DElete if success 
-      
+
       while IFS= read -r filepath 
       do 
         echo "Deleting the file: $filepath"
@@ -76,6 +76,7 @@ if [ ! -z "$FILES" ]; then
    else 
       echo "Archieve the files....FAILURE"
       exit 1
+   fi
 else
    echo -e "No files to archieve....$R Skipping...$N"
 fi
