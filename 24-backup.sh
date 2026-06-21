@@ -48,10 +48,11 @@ FILES=$(find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS)
 
 # -z checks if the variable is empty or not. If it is empty, then it will return true.
 if [ ! -z "$FILES" ]; then
-   echo "files found"
+   echo "files found:$FILES"
    TIMESTAMP=$(date +%F-%H-%M)
    ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
-   echo "Archieving the files to $ZIP_FILE"
+   echo "Zip file name : $ZIP_FILE"
+   echo $FILES | zip -@ -j "$ZIP_FILE"  # -@ to read the file names from stdin and -j to junk the directory structure
 else
    echo -e "No files to archieve....$R Skipping...$N"
 fi
