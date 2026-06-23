@@ -15,7 +15,10 @@ DAYS=${3:-14} #default 14 days if not provided
 
 LOGS_FOLDER="/var/log/shell-script"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) #getting script name without extension
-LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
+# LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
+
+LOG_FILE="$LOGS_FOLDER/backup.log" #modified to run the script as command
+
 
 mkdir -p $LOGS_FOLDER #create logs folder if not exist
 echo "Script started executed at : $(date)" | tee -a $LOG_FILE 
