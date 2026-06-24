@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DISK_USAGE=$(dh -hT | grep -v Filesystem )
+DISK_USAGE=$(df -hT | grep -v Filesystem )
 
 while IFs= read -r line
 do
